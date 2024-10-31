@@ -9,5 +9,3 @@ Blog Articles: https://hacking-notes.medium.com/
 - CVE-2024-51380.md ---> Stored XSS
 - CVE-2024-51381.md ---> Missing CSRF protection
 - CVE-2024-51382.md ---> Missing CSRF protection
-
-(Add additional CVEs as needed)
