@@ -6,13 +6,13 @@ This repository contains a list of CVEs that have been found and documented by t
 Blog Articles: https://hacking-notes.medium.com/
 
 Patched
-- CVE-2024-51490 ---> Stored Cross-Site Scripting | Admin Account Takeover | Custom URL - Logo
-- CVE-2024-51486 ---> Stored Cross-Site Scripting | Admin Account Takeover | Custom URL - Favicon
-- CVE-2024-51489 ---> CSRF - Insufficient Validation | Sending Messages Without Proper Validation
-- CVE-2024-51488 ---> CSRF - Insufficient Validation | Delete Message Without Proper Validation
-- CVE-2024-51485 ---> CSRF - Insufficient Validation | Plugins (Activation/Deactivation) Without Proper Validation
-- CVE-2024-51484 ---> CSRF - Insufficient Validation | Controllers (Activation/Deactivation) Without Proper Validation
-- CVE-2024-51487 ---> CSRF - Insufficient Validation | Catalog (Activation/Deactivation) Without Proper Validation
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-x979-f6px-7j2w">CVE-2024-51490</a> ---> Stored Cross-Site Scripting | Admin Account Takeover | Custom URL - Logo
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-4xw5-f7xm-vpw5">CVE-2024-51486</a> ---> Stored Cross-Site Scripting | Admin Account Takeover | Custom URL - Favicon
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-4q69-983r-mwwr">CVE-2024-51489</a> ---> CSRF - Insufficient Validation | Sending Messages Without Proper Validation
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-46m4-5pxj-66f2">CVE-2024-51488</a> ---> CSRF - Insufficient Validation | Delete Message Without Proper Validation
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-xvfj-w962-hqcx">CVE-2024-51485</a> ---> CSRF - Insufficient Validation | Plugins (Activation/Deactivation) Without Proper Validation
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-h6vj-6rvc-3x29">CVE-2024-51484</a> ---> CSRF - Insufficient Validation | Controllers (Activation/Deactivation) Without Proper Validation
+- <a href="https://github.com/ampache/ampache/security/advisories/GHSA-5rmx-fjmc-mg6x">CVE-2024-51487</a> ---> CSRF - Insufficient Validation | Catalog (Activation/Deactivation) Without Proper Validation
 
 In Process
 - CVE-2024-51379 ---> Stored Cross-Site Scripting | Admin Account Takeover
