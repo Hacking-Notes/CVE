@@ -1,3 +1,11 @@
+<div align="center">
+
+<kbd>&nbsp;CVE&nbsp;</kbd> &nbsp; <kbd>&nbsp;RESEARCH&nbsp;</kbd> &nbsp; <kbd>&nbsp;DISCLOSURE&nbsp;</kbd> &nbsp; 
+
+[![Website](https://img.shields.io/badge/WEBSITE-hacking--notes.com-ff3333?style=flat-square&labelColor=000000)](https://hacking-notes.com)
+
+</div>
+
 ## Introduction
 This repository contains a list of CVEs that have been found and documented by the Hacking-Notes team. Each entry includes details about the vulnerability, its impact, and potential mitigation strategies.
 
@@ -17,3 +25,18 @@ Patched
 - <a href="https://hacking-notes.medium.com/cve-2024-51380-jatos-v3-9-3-stored-xss-properties-component-44aea338ee9c">CVE-2024-51380</a> ---> Stored Cross-Site Scripting | Admin Account Takeover
 - <a href="https://medium.com/@hacking-notes/cve-2024-51381-jatos-v3-9-3-csrf-admin-account-creation-94035f24d0be">CVE-2024-51381</a> ---> CSRF - Missing protection | Admin Account Creation
 - <a href="https://medium.com/@hacking-notes/cve-2024-51382-jatos-v3-9-3-csrf-admin-password-reset-1adeff0386ed">CVE-2024-51382</a> ---> CSRF - Missing protection | Admin Password Reset
+
+<br>
+
+<div align="center">
+
+### ───────────────  HACKING NOTES ECOSYSTEM  ───────────────
+
+[![Website](https://img.shields.io/badge/🌐_WEBSITE-hacking--notes.com-ff3333?style=flat-square&labelColor=000000)](https://hacking-notes.com)
+[![Roadmap](https://img.shields.io/badge/🗺_ROADMAP-Hacker--Roadmap-f5f5f5?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/Hacker-Roadmap)
+[![RedTeam](https://img.shields.io/badge/🔴_RED_TEAM-notes-ff3333?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/RedTeam)
+[![BlueTeam](https://img.shields.io/badge/🔵_BLUE_TEAM-notes-3388ff?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/BlueTeam)
+
+<sub><code>// part of the Hacking Notes toolkit — hacking-notes.com</code></sub>
+
+</div>
