@@ -1,13 +1,25 @@
+<a name="top"></a>
+
 <div align="center">
 
-<kbd>&nbsp;CVE&nbsp;</kbd> &nbsp; <kbd>&nbsp;RESEARCH&nbsp;</kbd> &nbsp; <kbd>&nbsp;DISCLOSURE&nbsp;</kbd> &nbsp; 
+<img src="assets/header.svg" alt="CVE Research" width="100%" />
 
-[![Website](https://img.shields.io/badge/WEBSITE-hacking--notes.com-ff3333?style=flat-square&labelColor=000000)](https://hacking-notes.com)
+<br />
+
+<a href="https://github.com/Hacking-Notes/CVE/stargazers"><img src="https://img.shields.io/github/stars/Hacking-Notes/CVE?style=for-the-badge&logo=github&logoColor=1f2328&label=Stars&labelColor=f6f8fa&color=059669" alt="Stars" /></a>
+<a href="https://github.com/Hacking-Notes/CVE/network/members"><img src="https://img.shields.io/github/forks/Hacking-Notes/CVE?style=for-the-badge&logo=git&logoColor=1f2328&label=Forks&labelColor=f6f8fa&color=0284c7" alt="Forks" /></a>
+<a href="https://github.com/Hacking-Notes/CVE/commits"><img src="https://img.shields.io/github/last-commit/Hacking-Notes/CVE?style=for-the-badge&label=Updated&labelColor=f6f8fa&color=7c3aed" alt="Last commit" /></a>
+<a href="https://hacking-notes.com"><img src="https://img.shields.io/badge/More-hacking--notes.com-db2777?style=for-the-badge&labelColor=f6f8fa" alt="hacking-notes.com" /></a>
 
 </div>
 
+<br />
+
 ## Introduction
 This repository contains a list of CVEs that have been found and documented by the Hacking-Notes team. Each entry includes details about the vulnerability, its impact, and potential mitigation strategies.
+
+
+<img src="assets/divider.svg" width="100%" alt="" />
 
 ## List of CVEs
 
@@ -26,17 +38,24 @@ Patched
 - <a href="https://medium.com/@hacking-notes/cve-2024-51381-jatos-v3-9-3-csrf-admin-account-creation-94035f24d0be">CVE-2024-51381</a> ---> CSRF - Missing protection | Admin Account Creation
 - <a href="https://medium.com/@hacking-notes/cve-2024-51382-jatos-v3-9-3-csrf-admin-password-reset-1adeff0386ed">CVE-2024-51382</a> ---> CSRF - Missing protection | Admin Password Reset
 
-<br>
+<img src="assets/divider.svg" width="100%" alt="" />
+
+## 🧰 Hacking Notes Ecosystem
 
 <div align="center">
 
-### ───────────────  HACKING NOTES ECOSYSTEM  ───────────────
-
-[![Website](https://img.shields.io/badge/🌐_WEBSITE-hacking--notes.com-ff3333?style=flat-square&labelColor=000000)](https://hacking-notes.com)
-[![Roadmap](https://img.shields.io/badge/🗺_ROADMAP-Hacker--Roadmap-f5f5f5?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/Hacker-Roadmap)
-[![RedTeam](https://img.shields.io/badge/🔴_RED_TEAM-notes-ff3333?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/RedTeam)
-[![BlueTeam](https://img.shields.io/badge/🔵_BLUE_TEAM-notes-3388ff?style=flat-square&labelColor=000000)](https://github.com/Hacking-Notes/BlueTeam)
-
-<sub><code>// part of the Hacking Notes toolkit — hacking-notes.com</code></sub>
+🌐 &nbsp;**[hacking-notes.com](https://hacking-notes.com)** &nbsp;·&nbsp; ✍️ &nbsp;**[blog](https://hacking-notes.medium.com/)** &nbsp;·&nbsp; 💬 &nbsp;**[discord](https://discord.gg/r68ameNHrD)**
 
 </div>
+
+| | Resource | What you get |
+| :-: | -------- | ------------ |
+| 🗺 | **[Hacker-Roadmap](https://github.com/Hacking-Notes/Hacker-Roadmap)** | Structured paths from beginner to pro — hobbyist, bug bounty, certs & degree. |
+| 🔴 | **[RedTeam Notes](https://github.com/Hacking-Notes/RedTeam)** | Offensive security notes: recon, exploitation, Windows & Linux. |
+| 🔷 | **[BlueTeam Notes](https://github.com/Hacking-Notes/BlueTeam)** | Defensive security notes: forensics, malware, log & packet analysis. |
+| 🧩 | **[Extensions](https://github.com/Hacking-Notes/Extensions)** | Curated Chrome extensions for ethical hacking & recon. |
+| 🔖 | **[Bookmarks](https://github.com/Hacking-Notes/Bookmarks)** | Curated hacker bookmark collection, one import away. |
+
+<img src="assets/footer.svg" width="100%" alt="" />
+
+<div align="right"><a href="#top">⬆ back to top</a></div>
