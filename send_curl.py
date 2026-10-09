@@ -6,15 +6,36 @@ Set SEND_COUNT below to how many times you want to send it (e.g. 1 or 2).
 
 import shlex
 import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 
 # ---------------------------------------------------------------------------
 # How many times to send the request. Change this to 1 or 2 (or any number).
 SEND_COUNT = 1
+# Send the requests concurrently (in parallel) instead of one after another.
+# When SEND_COUNT is 2 or 3, they fire almost at the same time so you don't wait.
+CONCURRENT = True
 # File that holds the curl command copied as bash.
 CURL_FILE = "curl.txt"
 # ---------------------------------------------------------------------------
+
+
+def send_once(n, method, url, headers, cookies, data):
+    """Send the request once and return (n, result_string)."""
+    try:
+        resp = requests.request(
+            method=method,
+            url=url,
+            headers=headers,
+            cookies=cookies,
+            data=data,
+            allow_redirects=True,
+        )
+        line = f"[{n}/{SEND_COUNT}] {resp.status_code} {resp.reason} ({len(resp.content)} bytes)"
+        return n, line, resp
+    except requests.RequestException as exc:
+        return n, f"[{n}/{SEND_COUNT}] ERROR: {exc}", None
 
 
 def parse_curl(curl_text):
@@ -101,22 +122,34 @@ def main():
 
     print(f"Parsed: {method} {url}")
     print(f"Headers: {len(headers)} | Cookies: {len(cookies)} | Body: {'yes' if data else 'no'}")
-    print(f"Sending {SEND_COUNT} time(s)...\n")
+    mode = "concurrently" if CONCURRENT and SEND_COUNT > 1 else "one by one"
+    print(f"Sending {SEND_COUNT} time(s) {mode}...\n")
 
-    for n in range(1, SEND_COUNT + 1):
-        resp = requests.request(
-            method=method,
-            url=url,
-            headers=headers,
-            cookies=cookies,
-            data=data,
-            allow_redirects=True,
-        )
-        print(f"[{n}/{SEND_COUNT}] {resp.status_code} {resp.reason} "
-              f"({len(resp.content)} bytes)")
+    last_resp = None
 
-    print("\nLast response body (first 500 chars):")
-    print(resp.text[:500])
+    if CONCURRENT and SEND_COUNT > 1:
+        # Fire all requests at once and print results as they come back.
+        with ThreadPoolExecutor(max_workers=SEND_COUNT) as pool:
+            futures = [
+                pool.submit(send_once, n, method, url, headers, cookies, data)
+                for n in range(1, SEND_COUNT + 1)
+            ]
+            for future in as_completed(futures):
+                _, line, resp = future.result()
+                print(line)
+                if resp is not None:
+                    last_resp = resp
+    else:
+        # Send sequentially.
+        for n in range(1, SEND_COUNT + 1):
+            _, line, resp = send_once(n, method, url, headers, cookies, data)
+            print(line)
+            if resp is not None:
+                last_resp = resp
+
+    if last_resp is not None:
+        print("\nLast response body (first 500 chars):")
+        print(last_resp.text[:500])
 
 
 if __name__ == "__main__":
