@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import re
 import shlex
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -8,6 +9,17 @@ import requests
 SEND_COUNT = 1
 CONCURRENT = True
 CURL_FILE = "curl.txt"
+
+
+def with_label_number(data, n):
+    if not data:
+        return data
+
+    def repl(m):
+        base = re.sub(r"\d+$", "", m.group(2))
+        return f'{m.group(1)}{base}{n}{m.group(3)}'
+
+    return re.sub(r'("labelName"\s*:\s*")([^"]*)(")', repl, data)
 
 
 def send_once(n, method, url, headers, cookies, data):
@@ -110,7 +122,8 @@ def main():
     if CONCURRENT and SEND_COUNT > 1:
         with ThreadPoolExecutor(max_workers=SEND_COUNT) as pool:
             futures = [
-                pool.submit(send_once, n, method, url, headers, cookies, data)
+                pool.submit(send_once, n, method, url, headers, cookies,
+                            with_label_number(data, n))
                 for n in range(1, SEND_COUNT + 1)
             ]
             for future in as_completed(futures):
@@ -120,7 +133,7 @@ def main():
                     failed += 1
     else:
         for n in range(1, SEND_COUNT + 1):
-            if send_once(n, method, url, headers, cookies, data):
+            if send_once(n, method, url, headers, cookies, with_label_number(data, n)):
                 sent += 1
             else:
                 failed += 1
