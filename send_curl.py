@@ -12,7 +12,7 @@ CURL_FILE = "curl.txt"
 
 def send_once(n, method, url, headers, cookies, data):
     try:
-        resp = requests.request(
+        requests.request(
             method=method,
             url=url,
             headers=headers,
@@ -20,10 +20,9 @@ def send_once(n, method, url, headers, cookies, data):
             data=data,
             allow_redirects=True,
         )
-        line = f"[{n}/{SEND_COUNT}] {resp.status_code} {resp.reason} ({len(resp.content)} bytes)"
-        return n, line, resp
-    except requests.RequestException as exc:
-        return n, f"[{n}/{SEND_COUNT}] ERROR: {exc}", None
+        return True
+    except requests.RequestException:
+        return False
 
 
 def parse_curl(curl_text):
@@ -102,12 +101,11 @@ def main():
 
     method, url, headers, cookies, data = parse_curl(curl_text)
 
-    print(f"Parsed: {method} {url}")
-    print(f"Headers: {len(headers)} | Cookies: {len(cookies)} | Body: {'yes' if data else 'no'}")
     mode = "concurrently" if CONCURRENT and SEND_COUNT > 1 else "one by one"
-    print(f"Sending {SEND_COUNT} time(s) {mode}...\n")
+    print(f"Sending {SEND_COUNT} request(s) {mode}...")
 
-    last_resp = None
+    sent = 0
+    failed = 0
 
     if CONCURRENT and SEND_COUNT > 1:
         with ThreadPoolExecutor(max_workers=SEND_COUNT) as pool:
@@ -116,20 +114,18 @@ def main():
                 for n in range(1, SEND_COUNT + 1)
             ]
             for future in as_completed(futures):
-                _, line, resp = future.result()
-                print(line)
-                if resp is not None:
-                    last_resp = resp
+                if future.result():
+                    sent += 1
+                else:
+                    failed += 1
     else:
         for n in range(1, SEND_COUNT + 1):
-            _, line, resp = send_once(n, method, url, headers, cookies, data)
-            print(line)
-            if resp is not None:
-                last_resp = resp
+            if send_once(n, method, url, headers, cookies, data):
+                sent += 1
+            else:
+                failed += 1
 
-    if last_resp is not None:
-        print("\nLast response body (first 500 chars):")
-        print(last_resp.text[:500])
+    print(f"Done: {sent}/{SEND_COUNT} request(s) sent" + (f", {failed} failed" if failed else ""))
 
 
 if __name__ == "__main__":
