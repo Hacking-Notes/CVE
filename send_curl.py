@@ -1,28 +1,16 @@
 #!/usr/bin/env python3
-"""Read a curl command (copied as 'bash' for curl) from curl.txt and replay it with requests.
-
-Set SEND_COUNT below to how many times you want to send it (e.g. 1 or 2).
-"""
-
 import shlex
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 
-# ---------------------------------------------------------------------------
-# How many times to send the request. Change this to 1 or 2 (or any number).
 SEND_COUNT = 1
-# Send the requests concurrently (in parallel) instead of one after another.
-# When SEND_COUNT is 2 or 3, they fire almost at the same time so you don't wait.
 CONCURRENT = True
-# File that holds the curl command copied as bash.
 CURL_FILE = "curl.txt"
-# ---------------------------------------------------------------------------
 
 
 def send_once(n, method, url, headers, cookies, data):
-    """Send the request once and return (n, result_string)."""
     try:
         resp = requests.request(
             method=method,
@@ -39,13 +27,10 @@ def send_once(n, method, url, headers, cookies, data):
 
 
 def parse_curl(curl_text):
-    """Turn a 'copy as bash' curl command into pieces requests can use."""
-    # Join line continuations ("\" at end of line) into one logical line.
     cleaned = curl_text.replace("\\\n", " ").replace("^\n", " ")
     tokens = shlex.split(cleaned)
 
     if not tokens or tokens[0] != "curl":
-        # Some copies drop the leading "curl"; tolerate that.
         if tokens and tokens[0] != "curl":
             tokens = ["curl"] + tokens
 
@@ -55,7 +40,7 @@ def parse_curl(curl_text):
     cookies = {}
     data = None
 
-    i = 1  # skip "curl"
+    i = 1
     while i < len(tokens):
         tok = tokens[i]
 
@@ -85,16 +70,13 @@ def parse_curl(curl_text):
         elif tok in ("--compressed", "-L", "--location", "-k", "--insecure",
                      "-s", "--silent", "-i", "--include", "-v", "--verbose",
                      "-S", "--show-error", "-g", "--globoff"):
-            # Flags with no argument that don't change the request itself.
             i += 1
         elif tok.startswith("-"):
-            # Unknown option; skip it and its value if it looks like it takes one.
             if i + 1 < len(tokens) and not tokens[i + 1].startswith("-"):
                 i += 2
             else:
                 i += 1
         else:
-            # Bare token = the URL.
             if url is None:
                 url = tok
             i += 1
@@ -128,7 +110,6 @@ def main():
     last_resp = None
 
     if CONCURRENT and SEND_COUNT > 1:
-        # Fire all requests at once and print results as they come back.
         with ThreadPoolExecutor(max_workers=SEND_COUNT) as pool:
             futures = [
                 pool.submit(send_once, n, method, url, headers, cookies, data)
@@ -140,7 +121,6 @@ def main():
                 if resp is not None:
                     last_resp = resp
     else:
-        # Send sequentially.
         for n in range(1, SEND_COUNT + 1):
             _, line, resp = send_once(n, method, url, headers, cookies, data)
             print(line)
